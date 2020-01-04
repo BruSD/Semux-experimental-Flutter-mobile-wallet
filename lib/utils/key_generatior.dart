@@ -7,13 +7,13 @@ class KeyGenerator {
   Future<void> createNewPair(String seedPrivet) async {}
 
   Future<void> testNewPair() async {
-//    key.fromPrivetKey(privetKey: testSecretFromSemuxKey);
+    key.fromPrivetKey(privetKey: testSecretFromSemuxKey);
     key.showPair();
 
   }
 
   Future<void> testRestoreFromPrivetKey() async {
-    key.fromPrivetKey(privetKey: testSecretFromSemuxKey);
-    key.showPair();
+    key.fromPrivetKeyHD(privetKey: testSecretFromSemuxKey);
+
   }
 }

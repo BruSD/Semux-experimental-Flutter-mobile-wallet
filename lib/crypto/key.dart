@@ -1,31 +1,29 @@
-import 'dart:typed_data';
+import "package:hex/hex.dart";
 
-import 'package:cryptography/cryptography.dart' as crypto;
 import 'package:semux_mobile_wallet/crypto/hash.dart';
+import 'package:semux_mobile_wallet/crypto/helper.dart';
+import 'package:semux_mobile_wallet/global/constant.dart';
 
-import 'package:semux_mobile_wallet/crypto/hex.dart';
-
-class Key {
+class Key with SemuxHelper {
   final int PUBLIC_KEY_LEN = 44;
   final int PRIVATE_KEY_LEN = 48;
   final int ADDRESS_LEN = 20;
-  crypto.KeyPair kp;
+  KeyPair kp;
   var sk;
   var pk;
 
   Key() {
-    kp = crypto.x25519.newKeyPair();
+    kp = x25519.newKeyPair();
   }
 
-  fromPrivetKey({String privetKey}) {
-//    kp = crypto.x25519
-//        .newKeyPairFromSeed();
+  fromPrivetKey({String privetKey}) async {}
 
-  }
+  fromPrivetKeyHD({String privetKey}) async {}
 
   void showPair() {
-    print('Secret Key: ' + kp.secretKey.toString());
-    print('Public Key: ' + kp.publicKey.toString());
+    print('Secret Key: ' + kp.secretKey.toHex());
+    print('Public Key: ' + kp.publicKey.toHex());
+
     print('Secret Key: ' + HEX.encode(kp.secretKey.bytes));
     print('Address: ' + toAddressString());
 
@@ -41,6 +39,6 @@ class Key {
 //   */
   List<int> toAddress() {
     Hash hash = Hash();
-    return hash.h160(kp.publicKey.bytes);
+    return hash.h160(stringToUint8List(testPublicFromSemuxKey));
   }
 }
