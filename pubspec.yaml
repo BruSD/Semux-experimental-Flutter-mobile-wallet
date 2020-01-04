@@ -9,14 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
   cupertino_icons: ^0.1.2
-  pm_curve25519: ^0.5.7
 
-  pointycastle: ^1.0.2
-  ed25519_hd_key: ^1.0.1
-  ed25519: ^0.0.1
 
 dev_dependencies:
   flutter_test:

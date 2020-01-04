@@ -1,15 +1,19 @@
 import 'dart:typed_data';
 
-import 'package:cryptography/cryptography.dart';
-import 'package:cryptography/math.dart';
+import 'package:semux_mobile_wallet/semux/key_exchange_algorithm.dart';
+import 'package:semux_mobile_wallet/semux/math/multiply256.dart';
+import 'package:semux_mobile_wallet/semux/math/pack256.dart';
+import 'package:semux_mobile_wallet/semux/model/key_pair.dart';
+import 'package:semux_mobile_wallet/semux/model/public_key.dart';
+import 'package:semux_mobile_wallet/semux/model/secret_key.dart';
 
 /// Implements X25519 ([RFC 7748](https://tools.ietf.org/html/rfc7748)) key
 /// exchange algorithm.
-const KeyExchangeAlgorithm x25519 = _X25519();
+const KeyExchangeAlgorithm ed25519 = _X25519();
 
 class _X25519 extends KeyExchangeAlgorithm {
   @override
-  String get name => "x25519";
+  String get name => "ed25519";
 
   /// Constant [9, 0, ..., 0] is used when calculating shared secret.
   static final Uint8List _constant9 = () {
@@ -87,10 +91,10 @@ class _X25519 extends KeyExchangeAlgorithm {
   ///
   /// Used by [generateKeyPairSync] and [calculateSharedSecretSync].
   static void _scalarMultiply(
-      Uint8List result,
-      Uint8List secretKey,
-      Uint8List publicKey,
-      ) {
+    Uint8List result,
+    Uint8List secretKey,
+    Uint8List publicKey,
+  ) {
     // -------------------------------------------------------------------------
     // Unpack public key into the internal Int32List
     // -------------------------------------------------------------------------

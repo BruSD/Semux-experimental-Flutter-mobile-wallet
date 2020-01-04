@@ -8,7 +8,7 @@ import 'package:collection/collection.dart';
 ///   * Lengths are non-equal
 ///
 /// The implementation of [hash] produces a 16-bit hash by using XOR.
-
+//TODO: Update this to Semux requirements keys length 48-44-20
 class ConstantTimeBytesEquality implements Equality<List<int>> {
   const ConstantTimeBytesEquality();
 
